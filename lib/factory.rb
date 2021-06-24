@@ -30,34 +30,28 @@ class Factory
         end
 
         define_method :eql? do |other|
-          self.class == other.class && self.values == other.values
+          instance_of?(other.class) && values == other.values
         end
 
         define_method :[] do |arg|
-          if [String, Symbol].include? arg.class
-            return instance_variable_get("@#{arg}")
-          elsif arg.is_a? Integer
-            instance_variable_get(instance_variables[arg])
-          end
+          return instance_variable_get("@#{arg}") if [String, Symbol].include? arg.class
+          return instance_variable_get(instance_variables[arg]) if arg.is_a? Integer
         end
 
         define_method :[]= do |arg, value|
-          if [String, Symbol].include? arg.class
-            return instance_variable_set("@#{arg}", value)
-          elsif arg.is_a? Integer
-            instance_variable_set(instance_variables[arg], value)
-          end
+          return instance_variable_set("@#{arg}", value) if [String, Symbol].include? arg.class
+          return instance_variable_set(instance_variables[arg], value) if arg.is_a? Integer
         end
 
         define_method :to_h do
-          Hash[members.zip(values)]
+          members.zip(values).to_h
         end
 
         define_method :dig do |*arg|
-          # binding.pry
-          arg.inject(to_h) do |hash, key| 
-            return unless hash[key] 
-            hash[key] 
+          arg.inject(to_h) do |hash, key|
+            break unless hash[key]
+
+            hash[key]
           end
         end
 
@@ -74,16 +68,14 @@ class Factory
         end
 
         define_method :select do |&block|
-          # binding.pry
           values.select(&block)
         end
 
         define_method :values_at do |*index|
           instance_variables.values_at(*index).map { |arg| instance_variable_get(arg) }
-          # binding.pry
         end
 
-        class_eval(&block) if block_given?
+        class_eval(&block) if block
         alias_method :==, :eql?
         alias_method :size, :length
         alias_method :to_a, :values
