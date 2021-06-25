@@ -1,5 +1,3 @@
-require 'pry'
-
 class Factory
   class << self
     def new(*args, &block)
@@ -26,7 +24,7 @@ class Factory
         end
 
         define_method :members do
-          instance_variables.map { |arg| arg.to_s.delete('@').to_sym }
+          args
         end
 
         define_method :eql? do |other|

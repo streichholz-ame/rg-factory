@@ -1,12 +1,6 @@
 AllCops:
   TargetRubyVersion: 2.7.2
   NewCops: enable
-  Exclude:
-    - 'vendor/**/*'
-    - 'spec/fixtures/**/*'
-    - 'tmp/**/*'
-    - '.git/**/*'
-    - 'bin/*'
 
 Layout/LineLength:
   Max: 120
@@ -17,16 +11,8 @@ Metrics/MethodLength:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Metrics/BlockLength:
-  IgnoredMethods: ['describe', 'context']
-  Exclude:
-    - 'spec/*.rb'
-
-Style/FormatStringToken:
-  EnforcedStyle: template
+  IgnoredMethods: ["describe", "context"]
 
 Lint/ConstantDefinitionInBlock:
   Enabled: false
@@ -36,5 +22,3 @@ Lint/ShadowingOuterLocalVariable:
 
 Metrics/CyclomaticComplexity:
   Enabled: false
-
-
