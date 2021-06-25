@@ -1,7 +1,3 @@
-require:
-  - rubocop-rspec
-  - rubocop-performance
-
 AllCops:
   TargetRubyVersion: 2.7.2
   NewCops: enable
@@ -15,6 +11,9 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Metrics/MethodLength:
+  Max: 54
+
 Style/Documentation:
   Enabled: false
 
@@ -26,26 +25,16 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/*.rb'
 
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-RSpec/ExampleLength:
-  Max: 10
-
-RSpec/MultipleMemoizedHelpers:
-  Enabled: false
-
 Style/FormatStringToken:
   EnforcedStyle: template
 
 Lint/ConstantDefinitionInBlock:
   Enabled: false
 
-RSpec/LeakyConstantDeclaration:
+Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
-RSpec/MultipleExpectations:
+Metrics/CyclomaticComplexity:
   Enabled: false
 
-Performance/RedundantBlockCall:
-  Enabled: false
+

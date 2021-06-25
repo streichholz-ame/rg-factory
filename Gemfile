@@ -2,5 +2,8 @@
 
 source 'https://rubygems.org'
 
+gem 'fasterer'
 gem 'pry'
 gem 'rspec'
+gem 'rubocop'
+gem 'rubocop-rspec'

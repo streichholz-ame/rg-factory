@@ -56,7 +56,7 @@ class Factory
         end
 
         define_method :each do |&block|
-          members.each { |arg| block.call(public_send(arg)) }
+          values.each(&block)
         end
 
         define_method :each_pair do |&block|
